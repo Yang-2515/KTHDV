@@ -1,0 +1,44 @@
+﻿@model List<Category>
+@{
+    ViewData["Title"] = "UpdateProduct";
+    var categories = Model;
+    var product = ViewBag.Product;
+}
+<div class="container">
+    <div class="row ">
+        <h1 class="text-center text-info">Update Product</h1>
+    </div>
+    <form asp-controller="Product" asp-action="Update">
+        <div asp-validation-summary="ModelOnly"></div>
+        <input value="@product.Id" id="id" value="@product.Id" name="Id" hidden />
+        <div class="mb-3">
+            <label for="Name" class="form-label">Name</label>
+            <input class="form-control" id="Name" value="@product.Name" name="Name">
+        </div>
+        <div class="mb-3">
+            <label for="Price" class="form-label">Price</label>
+            <input class="form-control" id="Price" value="@product.Price" name="Price">
+        </div>
+        <div class="mb-3">
+            <label for="Quantity" class="form-label">Quantity</label>
+            <input class="form-control" id="Quantity" value="@product.Quantity" name="Quantity">
+        </div>
+         <div class="mb-3">
+            <label for="CategoryId">Category</label>
+            <select class="form-control" id="CategoryId" name="CategoryId">
+                @foreach (var item in categories){
+                    <option value="@item.Id" selected=@(item.Id == @product.CategoryId)>@item.Name</option>
+                }
+            </select>
+        </div>
+        <div class="text-center ">
+            <div class="w-25 btn-group">
+                <input class="btn btn-success mx-2" type="submit" name="submit" value="Save" />
+                <a asp-action="Index" asp-controller="Product" class="btn btn-secondary mx-2">
+                    <i class="fas fa-edit">Back</i>
+                </a>
+            </div>
+        </div>
+    </form>
+    
+</div>
